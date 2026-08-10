@@ -2,16 +2,16 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowUpRight,
+  ArrowRight,
   Briefcase,
-  FileBarChart2,
-  Hexagon,
   Home,
+  Images,
   Mail,
   Menu,
   Sparkles,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import { memo, useEffect, useState } from "react";
 import { RetaLogo } from "@/components/brand/RetaLogo";
 import {
@@ -22,10 +22,9 @@ import { cn } from "@/lib/utils";
 
 const navItems: TubelightNavItem[] = [
   { name: "Início", url: "#inicio", icon: Home },
-  { name: "Símbolo", url: "#simbolo", icon: Hexagon },
   { name: "Serviços", url: "#servicos", icon: Briefcase },
-  { name: "Sobre", url: "#sobre", icon: Sparkles },
-  { name: "Relatório", url: "#relatorio", icon: FileBarChart2 },
+  { name: "Portfólio", url: "#simbolo", icon: Images },
+  { name: "Sobre nós", url: "#sobre", icon: Sparkles },
   { name: "Contato", url: "#contato", icon: Mail },
 ];
 
@@ -79,7 +78,7 @@ function NavbarComponent() {
         className={cn(
           "border-b backdrop-blur-xl transition-colors duration-300",
           overHero
-            ? "border-white/10 bg-black/25"
+            ? "border-transparent bg-black/40"
             : "border-black/[0.06] bg-white/80",
         )}
       >
@@ -93,15 +92,25 @@ function NavbarComponent() {
             className="relative z-10 shrink-0 cursor-pointer"
             onClick={() => setMenuOpen(false)}
           >
-            <RetaLogo
-              variant="mark"
-              size="md"
-              showWordmark={false}
-              theme={overHero ? "dark" : "light"}
-            />
+              {overHero ? (
+              <Image
+                src="/brand/reta-wordmark-dark.png"
+                alt="Reta Publicidade"
+                width={120}
+                height={60}
+                className="h-9 w-auto object-contain md:h-10"
+                unoptimized
+              />
+            ) : (
+              <RetaLogo
+                variant="mark"
+                size="md"
+                showWordmark={false}
+                theme="light"
+              />
+            )}
           </a>
 
-          {/* Desktop links */}
           <TubelightNav
             items={navItems}
             tone={overHero ? "dark" : "light"}
@@ -112,25 +121,17 @@ function NavbarComponent() {
             <motion.a
               href="#contato"
               className={cn(
-                "group relative hidden cursor-pointer items-center justify-center gap-1.5 overflow-hidden rounded-[9px] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-[box-shadow,background-color] duration-300 sm:inline-flex md:px-5",
-                "bg-[#0071e3] shadow-[0_0_0_1px_rgba(0,113,227,0.2),0_6px_18px_rgba(0,113,227,0.28)] hover:bg-[#0077ed]",
-                overHero &&
-                  "shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_8px_24px_rgba(0,113,227,0.4)] hover:bg-[#1a8cff]",
+                "group relative hidden cursor-pointer items-center justify-center gap-1.5 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-300 sm:inline-flex md:px-5",
+                overHero
+                  ? "rounded-full border border-[#0071e3] text-white hover:bg-[#0071e3]/15"
+                  : "rounded-[9px] bg-[#0071e3] text-white shadow-[0_0_0_1px_rgba(0,113,227,0.2),0_6px_18px_rgba(0,113,227,0.28)] hover:bg-[#0077ed]",
               )}
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setMenuOpen(false)}
             >
-              <span
-                className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-white/55 to-transparent"
-                aria-hidden
-              />
-              <span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/18 to-transparent"
-                aria-hidden
-              />
               <span className="relative">Fale Conosco</span>
-              <ArrowUpRight className="relative h-3 w-3 opacity-80 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowRight className="relative h-3 w-3 opacity-80 transition-transform duration-300 group-hover:translate-x-0.5" />
             </motion.a>
 
             <button
@@ -155,7 +156,6 @@ function NavbarComponent() {
         </nav>
       </div>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen && (
           <>
@@ -212,10 +212,10 @@ function NavbarComponent() {
               <a
                 href="#contato"
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-[10px] bg-[#0071e3] px-5 text-[12px] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_8px_24px_rgba(0,113,227,0.35)]"
+                className="mt-4 flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-full border border-[#0071e3] px-5 text-[12px] font-semibold uppercase tracking-[0.12em] text-white"
               >
                 Fale Conosco
-                <ArrowUpRight className="h-3.5 w-3.5" />
+                <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </motion.div>
           </>
