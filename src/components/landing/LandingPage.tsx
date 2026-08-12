@@ -7,6 +7,7 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Navbar } from "@/components/sections/Navbar";
+import { Portfolio } from "@/components/sections/Portfolio";
 import { Report } from "@/components/sections/Report";
 import { Services } from "@/components/sections/Services";
 import { Symbol } from "@/components/sections/Symbol";
@@ -23,6 +24,7 @@ function LandingPageComponent() {
           <About />
           <Services />
           <Symbol />
+          <Portfolio />
           <Report />
           <Contact />
         </main>

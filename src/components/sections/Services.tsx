@@ -69,8 +69,8 @@ function ServicesComponent() {
             id="services-heading"
             className="font-[family-name:var(--font-display)] text-[clamp(1.85rem,4.2vw,3rem)] font-bold tracking-tight text-[#1d1d1f]"
           >
-            Como colocamos sua marca{" "}
-            <span className="text-blue-glow">na reta</span>
+            Colocamos sua marca na{" "}
+            <span className="text-blue-glow">RETA</span> do crescimento.
           </h2>
           <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-[#1d1d1f] md:text-base">
             Estratégia, criatividade e tecnologia — execução completa para

@@ -24,7 +24,8 @@ const navItems: TubelightNavItem[] = [
   { name: "Início", url: "#inicio", icon: Home },
   { name: "Sobre nós", url: "#sobre", icon: Sparkles },
   { name: "Serviços", url: "#servicos", icon: Briefcase },
-  { name: "Portfólio", url: "#simbolo", icon: Images },
+  { name: "Nosso Símbolo", url: "#simbolo", icon: Sparkles },
+  { name: "Portfólio", url: "#portfolio", icon: Images },
   { name: "Contato", url: "#contato", icon: Mail },
 ];
 

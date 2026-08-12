@@ -36,7 +36,7 @@ export function NavBar({ items, className, tone = "light" }: NavBarProps) {
         const match = items.find((item) => item.url === `#${visible.target.id}`);
         if (match) setActiveTab(match.name);
       },
-      { rootMargin: "-35% 0px -45% 0px", threshold: [0.1, 0.35, 0.6] },
+      { rootMargin: "-20% 0px -30% 0px", threshold: [0.05, 0.15, 0.3, 0.5] },
     );
 
     sectionIds.forEach((id) => {
