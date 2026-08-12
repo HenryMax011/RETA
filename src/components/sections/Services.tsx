@@ -33,7 +33,7 @@ const services = [
     ),
   },
   {
-    title: "Criação de Sistemas",
+    title: "Desenvolvimento de Sistemas com IA",
     description:
       "Sistemas sob medida para automatizar processos, dashboards e plataformas que escalam o seu negócio.",
     features: ["Automação", "Dashboards", "APIs"],
