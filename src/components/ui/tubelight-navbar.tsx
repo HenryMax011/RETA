@@ -44,7 +44,21 @@ export function NavBar({ items, className, tone = "light" }: NavBarProps) {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 50;
+      if (atBottom) {
+        const lastItem = items[items.length - 1];
+        if (lastItem) setActiveTab(lastItem.name);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [items]);
 
   return (

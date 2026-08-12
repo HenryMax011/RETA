@@ -20,9 +20,9 @@ function LandingPageComponent() {
         <Navbar />
         <main>
           <Hero />
-          <Symbol />
-          <Services />
           <About />
+          <Services />
+          <Symbol />
           <Report />
           <Contact />
         </main>

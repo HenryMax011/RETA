@@ -10,10 +10,10 @@ const clients = [
   { name: "Essentials Contabilidade", logo: "/clients/essentials.png" },
   { name: "Spirali Engenharia", logo: "/clients/spirali.png" },
   { name: "Classic Baby", logo: "/clients/classic-baby.png" },
+  { name: "Paulo Dantas", logo: "/clients/paulo-dantas.png" },
   { name: "Phoenixbor", logo: "/clients/phoenixbor.png" },
   { name: "Távora & Dantas", logo: "/clients/tavora-dantas.png" },
   { name: "Selavie Femme", logo: "/clients/selavie.png" },
-  { name: "Paulo Dantas", logo: "/clients/paulo-dantas.png" },
 ];
 
 function HeroComponent() {

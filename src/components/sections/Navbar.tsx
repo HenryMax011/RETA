@@ -22,9 +22,9 @@ import { cn } from "@/lib/utils";
 
 const navItems: TubelightNavItem[] = [
   { name: "Início", url: "#inicio", icon: Home },
-  { name: "Portfólio", url: "#simbolo", icon: Images },
-  { name: "Serviços", url: "#servicos", icon: Briefcase },
   { name: "Sobre nós", url: "#sobre", icon: Sparkles },
+  { name: "Serviços", url: "#servicos", icon: Briefcase },
+  { name: "Portfólio", url: "#simbolo", icon: Images },
   { name: "Contato", url: "#contato", icon: Mail },
 ];
 
