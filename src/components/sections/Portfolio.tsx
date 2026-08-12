@@ -92,22 +92,25 @@ function ProjectStack({ project, index }: { project: Project; index: number }) {
           const isFront = pos === 0;
           const isSecond = pos === 1;
 
-          const xOffset = reverse
-            ? isFront ? "10%" : isSecond ? "30%" : "20%"
-            : isFront ? "10%" : isSecond ? "-10%" : "0%";
-          const topOffset = isFront ? 0 : isSecond ? 24 : 48;
+          const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+          const xOffset = isMobile
+            ? isFront ? "2%" : isSecond ? "8%" : "5%"
+            : reverse
+              ? isFront ? "10%" : isSecond ? "30%" : "20%"
+              : isFront ? "10%" : isSecond ? "-10%" : "0%";
+          const topOffset = isFront ? 0 : isSecond ? (isMobile ? 16 : 24) : (isMobile ? 32 : 48);
           const rotation = isFront
-            ? (reverse ? 1.5 : -1.5)
+            ? (reverse ? 1 : -1)
             : isSecond
-              ? (reverse ? -3 : 4)
-              : (reverse ? -5.5 : 6.5);
+              ? (reverse ? -2 : 3)
+              : (reverse ? -4 : 5);
           const zIdx = isFront ? 30 : isSecond ? 20 : 10;
-          const scaleVal = isFront ? 1 : isSecond ? 0.94 : 0.88;
+          const scaleVal = isFront ? 1 : isSecond ? 0.95 : 0.9;
 
           return (
             <motion.div
               key={img.src}
-              className="absolute w-[85%] cursor-pointer overflow-hidden rounded-2xl border border-white/[0.08] sm:w-[80%]"
+              className="absolute left-1/2 w-[90%] -translate-x-1/2 cursor-pointer overflow-hidden rounded-2xl border border-white/[0.08] sm:left-auto sm:w-[80%] sm:translate-x-0"
               style={{
                 boxShadow: isFront
                   ? `0 30px 80px rgba(0,0,0,0.6), 0 0 40px ${project.color}10`

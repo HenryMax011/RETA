@@ -221,10 +221,10 @@ function SymbolComponent() {
                     </h3>
 
                     <div className="mt-7 max-w-2xl space-y-3">
-                      <p className="text-[15px] leading-relaxed text-[#1d1d1f] md:text-base">
+                      <p className="text-[15px] font-bold leading-relaxed text-[#1d1d1f] md:text-base">
                         {current.body}
                       </p>
-                      <p className="text-sm leading-relaxed text-[#1d1d1f]/80 md:text-[15px]">
+                      <p className="text-sm font-bold leading-relaxed text-[#1d1d1f]/80 md:text-[15px]">
                         {current.detail}
                       </p>
                     </div>
