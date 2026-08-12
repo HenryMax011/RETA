@@ -85,6 +85,7 @@ function SymbolComponent() {
       id="simbolo"
       className="relative overflow-hidden bg-[#f5f5f7] px-6 py-28 md:px-12 md:py-40"
       aria-labelledby="symbol-heading"
+      style={{ backgroundImage: "url(/brand/services-bg.png)", backgroundSize: "cover", backgroundPosition: "center" }}
     >
       <div className="relative z-10 mx-auto max-w-5xl">
         <ScrollReveal className="text-center">

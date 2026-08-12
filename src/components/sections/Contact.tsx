@@ -141,10 +141,9 @@ function ContactComponent() {
           </p>
           <h2
             id="contact-heading"
-            className="whitespace-nowrap font-[family-name:var(--font-display)] text-[clamp(1.5rem,3.5vw,2.75rem)] font-bold tracking-[-0.02em] text-white"
-            style={{ marginLeft: "-3.5rem" }}
+            className="font-[family-name:var(--font-display)] text-[clamp(1.5rem,3.5vw,2.75rem)] font-bold leading-[1.2] tracking-[-0.02em] text-white"
           >
-            Entre em contato com a <span className="text-blue-glow">RETA</span>
+            Entre em contato<br />com a <span className="text-blue-glow">RETA</span>
           </h2>
           <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-white/90">
             Converse com o assistente. Ao final, sua mensagem segue para o

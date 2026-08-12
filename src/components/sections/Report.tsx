@@ -118,10 +118,13 @@ function ReportComponent() {
       className="relative overflow-hidden bg-[#1d1d1f] px-6 py-28 md:px-12 md:py-36"
       aria-labelledby="report-heading"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(0,113,227,0.22),transparent_58%)]" />
-        <div className="absolute bottom-0 left-1/2 h-[35%] w-[55%] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(0,145,255,0.08),transparent_70%)] blur-3xl" />
-      </div>
+      <img
+        src="/brand/report-bg.png"
+        alt=""
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[#1d1d1f]/40" aria-hidden />
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <ScrollReveal className="mx-auto max-w-2xl text-center">

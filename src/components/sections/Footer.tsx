@@ -35,12 +35,12 @@ function FooterComponent() {
               className="inline-flex cursor-pointer"
             >
               <img
-                src="/brand/reta-wordmark-dark.png"
+                src="/brand/reta-wordmark-light.png"
                 alt="Reta Publicidade"
                 className="h-14 w-auto object-contain md:h-16"
               />
             </a>
-            <p className="mt-5 text-[13px] leading-relaxed text-[#6e6e73]">
+            <p className="mt-5 text-[13px] leading-relaxed text-[#1d1d1f]">
               Estratégia, criatividade e tecnologia — a nova geração da
               publicidade.
             </p>
@@ -51,7 +51,7 @@ function FooterComponent() {
 
           <div className="flex flex-1 flex-col gap-10 sm:flex-row sm:justify-end sm:gap-16 md:gap-20">
             <div>
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#86868b]">
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-[#1d1d1f]">
                 Navegação
               </p>
               <ul className="flex flex-col gap-2.5">
@@ -69,7 +69,7 @@ function FooterComponent() {
             </div>
 
             <div>
-              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#86868b]">
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.22em] text-[#1d1d1f]">
                 Social
               </p>
               <ul className="flex flex-col gap-2.5">
@@ -100,7 +100,7 @@ function FooterComponent() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-black/[0.06] pt-6 sm:flex-row sm:items-center">
-          <p className="text-[12px] text-[#86868b]">
+          <p className="text-[12px] text-[#1d1d1f]">
             &copy; {year} Reta Publicidade. Todos os direitos reservados.
           </p>
           <a
