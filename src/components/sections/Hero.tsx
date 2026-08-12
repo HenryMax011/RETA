@@ -64,8 +64,8 @@ function HeroComponent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
             >
-              Conectamos marcas às{" "}
-              <span className="text-[#0071e3]">pessoas certas.</span>
+              Atenção sem conversão{" "}
+              <span className="text-[#0071e3]">não basta.</span>
             </motion.h1>
 
             <motion.p
