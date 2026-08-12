@@ -128,11 +128,10 @@ function ContactComponent() {
                 aria-hidden
               />
               <div className="relative z-[1]">
-                <RetaLogo
-                  variant="mark"
-                  size="md"
-                  showWordmark={false}
-                  theme="dark"
+                <img
+                  src="/brand/reta-wordmark-dark.png"
+                  alt="Reta Publicidade"
+                  className="h-40 w-auto object-contain md:h-56"
                 />
               </div>
             </div>
@@ -142,11 +141,12 @@ function ContactComponent() {
           </p>
           <h2
             id="contact-heading"
-            className="font-[family-name:var(--font-display)] text-[clamp(1.85rem,4.2vw,2.75rem)] font-bold tracking-tight text-white"
+            className="whitespace-nowrap font-[family-name:var(--font-display)] text-[clamp(1.5rem,3.5vw,2.75rem)] font-bold tracking-[-0.02em] text-white"
+            style={{ marginLeft: "-3.5rem" }}
           >
-            Seja bem-vindo à <span className="text-blue-glow">Reta</span>
+            Entre em contato com a <span className="text-blue-glow">RETA</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-[#a1a1a6]">
+          <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-white/90">
             Converse com o assistente. Ao final, sua mensagem segue para o
             WhatsApp.
           </p>
@@ -294,7 +294,7 @@ function ContactComponent() {
                   )}
                 </motion.button>
                 {hasUserMessage && (
-                  <p className="mt-2.5 text-center text-[11px] leading-relaxed text-[#6e6e73]">
+                  <p className="mt-2.5 text-center text-[11px] leading-relaxed text-white/70">
                     Sua última mensagem será pré-preenchida no WhatsApp.
                   </p>
                 )}

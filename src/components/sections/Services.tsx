@@ -66,7 +66,7 @@ function ServicesComponent() {
             Como colocamos sua marca{" "}
             <span className="text-blue-glow">na reta</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-[#6e6e73] md:text-base">
+          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-[#1d1d1f] md:text-base">
             Estratégia, criatividade e tecnologia — execução completa para
             fazer sua marca avançar.
           </p>
@@ -110,7 +110,7 @@ function ServicesComponent() {
                     </h3>
                   </div>
 
-                  <p className="max-w-[34ch] text-[14px] leading-relaxed text-[#6e6e73]">
+                  <p className="max-w-[34ch] text-[14px] leading-relaxed text-[#1d1d1f]">
                     {service.description}
                   </p>
 
@@ -119,7 +119,7 @@ function ServicesComponent() {
                       <li
                         key={feature}
                         className={cn(
-                          "text-[11px] font-medium uppercase tracking-[0.16em] text-[#86868b]",
+                          "text-[11px] font-medium uppercase tracking-[0.16em] text-[#1d1d1f]",
                           "transition-colors duration-300 group-hover:text-[#0071e3]",
                         )}
                       >

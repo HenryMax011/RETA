@@ -99,7 +99,7 @@ function SymbolComponent() {
             Aquilo em que <span className="text-blue-glow">acreditamos</span>
           </h2>
 
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#6e6e73] md:text-base">
+          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#1d1d1f] md:text-base">
             A Reta Publicidade nasce da união entre estratégia, criatividade,
             tecnologia e inteligência artificial.
           </p>
@@ -220,10 +220,10 @@ function SymbolComponent() {
                     </h3>
 
                     <div className="mt-7 max-w-2xl space-y-3">
-                      <p className="text-[15px] leading-relaxed text-[#6e6e73] md:text-base">
+                      <p className="text-[15px] leading-relaxed text-[#1d1d1f] md:text-base">
                         {current.body}
                       </p>
-                      <p className="text-sm leading-relaxed text-[#86868b] md:text-[15px]">
+                      <p className="text-sm leading-relaxed text-[#1d1d1f]/80 md:text-[15px]">
                         {current.detail}
                       </p>
                     </div>
@@ -233,7 +233,7 @@ function SymbolComponent() {
                       {current.highlights.map((tag) => (
                         <li
                           key={tag}
-                          className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#6e6e73]"
+                          className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[#1d1d1f]"
                         >
                           <span className="h-1 w-1 rounded-full bg-[#0071e3]" aria-hidden />
                           {tag}

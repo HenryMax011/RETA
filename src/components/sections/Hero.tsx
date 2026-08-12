@@ -69,7 +69,7 @@ function HeroComponent() {
             </motion.h1>
 
             <motion.p
-              className="mt-7 max-w-md text-[15px] leading-[1.7] text-[#c8c8cc] md:text-base"
+              className="mt-7 max-w-md text-[15px] leading-[1.7] text-white/90 md:text-base"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.18 }}

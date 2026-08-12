@@ -135,7 +135,7 @@ function ReportComponent() {
             Resultados que colocam sua marca{" "}
             <span className="text-blue-glow">na reta</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-[#a1a1a6] md:text-base">
+          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-white/90 md:text-base">
             Transparência em cada etapa — do diagnóstico ao ROI. Números que
             mostram avanço, não só aparência.
           </p>
@@ -169,7 +169,7 @@ function ReportComponent() {
                 <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#4da3ff]">
                   {metric.label}
                 </p>
-                <p className="mt-2 text-[13px] leading-relaxed text-[#86868b]">
+                <p className="mt-2 text-[13px] leading-relaxed text-white/80">
                   {metric.detail}
                 </p>
               </div>
@@ -185,10 +185,10 @@ function ReportComponent() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-[family-name:var(--font-display)] text-base font-semibold tracking-tight text-white">
+                  <h3 className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-[#86868b]">
+                  <p className="mt-2 text-[14px] leading-relaxed text-white/80">
                     {item.text}
                   </p>
                 </div>

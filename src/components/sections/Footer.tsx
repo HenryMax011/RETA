@@ -34,11 +34,10 @@ function FooterComponent() {
               aria-label="Reta Publicidade"
               className="inline-flex cursor-pointer"
             >
-              <RetaLogo
-                variant="mark"
-                size="md"
-                showWordmark={false}
-                theme="light"
+              <img
+                src="/brand/reta-wordmark-dark.png"
+                alt="Reta Publicidade"
+                className="h-14 w-auto object-contain md:h-16"
               />
             </a>
             <p className="mt-5 text-[13px] leading-relaxed text-[#6e6e73]">

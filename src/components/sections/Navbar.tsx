@@ -22,8 +22,8 @@ import { cn } from "@/lib/utils";
 
 const navItems: TubelightNavItem[] = [
   { name: "Início", url: "#inicio", icon: Home },
-  { name: "Serviços", url: "#servicos", icon: Briefcase },
   { name: "Portfólio", url: "#simbolo", icon: Images },
+  { name: "Serviços", url: "#servicos", icon: Briefcase },
   { name: "Sobre nós", url: "#sobre", icon: Sparkles },
   { name: "Contato", url: "#contato", icon: Mail },
 ];
@@ -79,7 +79,7 @@ function NavbarComponent() {
           "border-b backdrop-blur-xl transition-colors duration-300",
           overHero
             ? "border-transparent bg-black/40"
-            : "border-black/[0.06] bg-white/80",
+            : "border-white/[0.06] bg-[#0a0b0f]/90",
         )}
       >
         <nav
@@ -92,28 +92,19 @@ function NavbarComponent() {
             className="relative z-10 shrink-0 cursor-pointer"
             onClick={() => setMenuOpen(false)}
           >
-              {overHero ? (
               <Image
                 src="/brand/reta-wordmark-dark.png"
                 alt="Reta Publicidade"
                 width={120}
                 height={60}
-                className="h-9 w-auto object-contain md:h-10"
+                className="h-24 w-auto object-contain md:h-28"
                 unoptimized
               />
-            ) : (
-              <RetaLogo
-                variant="mark"
-                size="md"
-                showWordmark={false}
-                theme="light"
-              />
-            )}
           </a>
 
           <TubelightNav
             items={navItems}
-            tone={overHero ? "dark" : "light"}
+            tone="dark"
             className="hidden min-w-0 flex-1 justify-center lg:flex"
           />
 
@@ -124,7 +115,7 @@ function NavbarComponent() {
                 "group relative hidden cursor-pointer items-center justify-center gap-1.5 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-300 sm:inline-flex md:px-5",
                 overHero
                   ? "rounded-full border border-[#0071e3] text-white hover:bg-[#0071e3]/15"
-                  : "rounded-[9px] bg-[#0071e3] text-white shadow-[0_0_0_1px_rgba(0,113,227,0.2),0_6px_18px_rgba(0,113,227,0.28)] hover:bg-[#0077ed]",
+                  : "rounded-full border border-[#0071e3] bg-[#0071e3] text-white hover:bg-[#0077ed]",
               )}
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
