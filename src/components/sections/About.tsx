@@ -88,11 +88,6 @@ function AboutComponent() {
               <span className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
             </div>
 
-            <p className="mt-8 font-[family-name:var(--font-display)] text-[1.5rem] font-bold tracking-tight text-white md:text-[1.85rem]">
-              Direção clara para marcas que querem{" "}
-              <span className="text-blue-glow">crescer com consistência.</span>
-            </p>
-
             <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-1 gap-y-2">
               {pillars.map((item, i) => (
                 <li key={item} className="flex items-center gap-1">

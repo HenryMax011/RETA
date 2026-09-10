@@ -13,7 +13,7 @@ interface WhatsAppCTAProps {
 const QUICK_REPLIES = [
   "Quero um orçamento",
   "Tráfego & Performance",
-  "Branding & Criatividade",
+  "Mídias Sociais",
   "Tecnologia & IA",
   "Outro assunto",
 ];
@@ -35,7 +35,7 @@ function openWhatsApp(phone: string, text: string) {
 }
 
 function WhatsAppCTAComponent({
-  phone = "5511999999999",
+  phone = "5511990202683",
   className,
 }: WhatsAppCTAProps) {
   const [open, setOpen] = useState(false);

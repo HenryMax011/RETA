@@ -7,7 +7,7 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { RetaLogo } from "@/components/brand/RetaLogo";
 import { cn } from "@/lib/utils";
 
-const WA_PHONE = "5511999999999";
+const WA_PHONE = "5511990202683";
 const MAP_QUERY = "Rua Perucaba 97, São Paulo, SP";
 const MAP_EMBED = `https://maps.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=16&output=embed`;
 const MAP_OPEN = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`;
@@ -17,14 +17,14 @@ type ChatMsg = { id: string; role: "bot" | "user"; text: string };
 const QUICK = [
   "Quero um orçamento",
   "Tráfego & Performance",
-  "Branding & Criatividade",
+  "Mídias Sociais",
   "Tecnologia & IA",
 ];
 
 function botReply(input: string): string {
   const t = input.toLowerCase();
   if (t.includes("orçamento") || t.includes("preço") || t.includes("valor")) {
-    return "Perfeito. Me conte o segmento da sua marca e o objetivo principal (tráfego, branding ou IA). Depois continue no WhatsApp para falar com o time.";
+    return "Perfeito. Me conte o segmento da sua marca e o objetivo principal (tráfego, mídias sociais, site ou IA). Depois continue no WhatsApp para falar com o time.";
   }
   if (
     t.includes("tráfego") ||
@@ -33,6 +33,17 @@ function botReply(input: string): string {
     t.includes("site")
   ) {
     return "Tráfego, site e performance — estratégia e mídia com ROI mensurável. Quando quiser, continue no WhatsApp com o que você descreveu.";
+  }
+  if (
+    t.includes("mídia") ||
+    t.includes("midia") ||
+    t.includes("instagram") ||
+    t.includes("social") ||
+    t.includes("vídeo") ||
+    t.includes("video") ||
+    t.includes("reels")
+  ) {
+    return "Gestão de mídias sociais: criação de imagens, edição de vídeos e conteúdo para Instagram e outras redes. Continue no WhatsApp para falar com o time.";
   }
   if (t.includes("brand") || t.includes("criativ") || t.includes("identidade")) {
     return "Branding & Criatividade: identidade e narrativas com sofisticação. Posso te conectar com o time pelo WhatsApp agora.";

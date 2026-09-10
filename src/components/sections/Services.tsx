@@ -20,6 +20,19 @@ const services = [
     ),
   },
   {
+    title: "Gestão de Mídias Sociais",
+    description:
+      "Gestão completa das redes — criação de imagens, edição de vídeos e conteúdo para Instagram, Reels, Stories e demais plataformas.",
+    features: ["Instagram", "Imagens", "Vídeos"],
+    image: "/services/midias.jpg",
+    imageAlt: "Gestão de mídias sociais, criação de imagens e vídeos",
+    icon: (
+      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+      </svg>
+    ),
+  },
+  {
     title: "Criação de Sites",
     description:
       "Sites modernos, responsivos e otimizados para conversão — do design à publicação com performance e identidade visual.",
@@ -78,7 +91,7 @@ function ServicesComponent() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-16 grid gap-8 md:mt-20 md:grid-cols-3 md:gap-8">
+        <div className="mt-16 grid gap-8 md:mt-20 md:grid-cols-2 md:gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={service.title} delay={index * 0.1}>
               <article className="group flex h-full flex-col">
@@ -89,7 +102,7 @@ function ServicesComponent() {
                       src={service.image}
                       alt={service.imageAlt}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
                     />
                     <div

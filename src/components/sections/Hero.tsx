@@ -6,13 +6,13 @@ import Image from "next/image";
 import { memo } from "react";
 
 const clients = [
-  { name: "Captar", logo: "/clients/captar.png" },
+  { name: "Captar", logo: "/clients/captar.png", scale: 0.72 },
   { name: "Essentials Contabilidade", logo: "/clients/essentials.png" },
-  { name: "Spirali Engenharia", logo: "/clients/spirali.png" },
+  { name: "Spirali Engenharia", logo: "/clients/spirali.png", scale: 0.68 },
   { name: "Classic Baby", logo: "/clients/classic-baby.png" },
-  { name: "Paulo Dantas", logo: "/clients/paulo-dantas.png" },
+  { name: "Paulo Dantas", logo: "/clients/paulo-dantas.png", scale: 0.72 },
   { name: "Phoenixbor", logo: "/clients/phoenixbor.png" },
-  { name: "Távora & Dantas", logo: "/clients/tavora-dantas.png" },
+  { name: "Távora & Dantas", logo: "/clients/tavora-dantas.png", scale: 0.72 },
   { name: "Selavie Femme", logo: "/clients/selavie.png" },
 ];
 
@@ -20,24 +20,32 @@ function HeroComponent() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[100svh] overflow-hidden"
+      className="relative min-h-[100svh] overflow-hidden bg-[#07080c]"
       aria-labelledby="hero-heading"
     >
-      {/* Imagem de fundo full-bleed */}
+      {/* Imagem de fundo — no mobile mais transparente para o texto ganhar contraste */}
       <Image
         src="/brand/hero-bg.png"
         alt=""
         fill
         priority
-        className="object-cover object-center"
+        className="object-cover object-center opacity-50 md:opacity-100"
         sizes="100vw"
         unoptimized
         aria-hidden
       />
 
-      {/* Overlay escuro para legibilidade do texto */}
+      {/* Mobile: véu uniforme + vinheta. Desktop: gradiente só à esquerda. */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0a0b0f]/65 via-[#0a0b0f]/20 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-[#07080c]/58 md:hidden"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#07080c]/45 via-transparent to-[#07080c]/55 md:hidden"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-[#0a0b0f]/65 via-[#0a0b0f]/20 to-transparent md:block"
         aria-hidden
       />
 
@@ -52,7 +60,7 @@ function HeroComponent() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0071e3]" />
-              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#a3a3ab]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/75 md:text-[#a3a3ab]">
                 Estratégia · Criatividade · Resultados
               </p>
             </motion.div>
@@ -69,7 +77,7 @@ function HeroComponent() {
             </motion.h1>
 
             <motion.p
-              className="mt-7 max-w-md text-[15px] leading-[1.7] text-white/90 md:text-base"
+              className="mt-7 max-w-md text-[15px] leading-[1.7] text-white md:text-base md:text-white/90"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.18 }}
@@ -94,7 +102,7 @@ function HeroComponent() {
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </motion.a>
               <motion.a
-                href="#simbolo"
+                href="#portfolio"
                 className="group inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-[10px] border border-white/35 bg-transparent px-6 text-[12px] font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:border-white/60 hover:bg-white/[0.04]"
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.985 }}
@@ -130,6 +138,11 @@ function HeroComponent() {
                       width={140}
                       height={70}
                       className="max-h-14 w-auto object-contain mix-blend-lighten md:max-h-[4.5rem]"
+                      style={
+                        client.scale
+                          ? { transform: `scale(${client.scale})` }
+                          : undefined
+                      }
                       unoptimized
                     />
                   </div>
