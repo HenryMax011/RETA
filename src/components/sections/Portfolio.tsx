@@ -2,46 +2,85 @@
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { memo, useCallback, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
+import { SiteScreen, type SiteProject } from "@/components/ui/SiteDevice";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-interface Slide {
+const DRAG_THRESHOLD = 56;
+
+interface Slide extends SiteProject {
   client: string;
   category: string;
-  src: string;
   color: string;
+  href: string;
 }
 
 const slides: Slide[] = [
   {
     client: "Selavie Femme",
+    name: "Selavie",
     category: "Branding",
-    src: "/portfolio/selavie-3.jpg",
+    image: "/portfolio/selavie-3.jpg",
     color: "#5ac8fa",
-  },
-  {
-    client: "Selavie Femme",
-    category: "E-commerce",
-    src: "/portfolio/selavie-1.jpg",
-    color: "#5ac8fa",
+    href: "https://selaviefemme.com.br/",
+    tone: "selavie",
+    mark: "hexagon",
+    letter: "S",
+    slogan: "Cuidado que permanece.",
   },
   {
     client: "Phoenixbor",
+    name: "Phoenixbor",
     category: "Site",
-    src: "/portfolio/phoenix-1.jpg",
+    image: "/portfolio/phoenix-1.jpg",
     color: "#34c759",
+    href: "https://phoenixbor.com.br/",
+    tone: "phoenix",
+    mark: "circle",
+    letter: "P",
+    slogan: "Precisão em cada vedação.",
   },
   {
     client: "Nexotechh",
+    name: "Nexotechh",
     category: "Site",
-    src: "/portfolio/nexotechh-1.jpg",
+    image: "/portfolio/nexotechh-1.jpg",
     color: "#c8f542",
+    href: "https://nexotechh.vercel.app/",
+    tone: "nexo",
+    mark: "diamond",
+    letter: "N",
+    slogan: "Sites que transformam negócios.",
   },
   {
-    client: "Nexotechh",
+    client: "HTRAP & DENIMM",
+    name: "HTRAP",
+    category: "E-commerce",
+    image: "/portfolio/htrap-1.jpg",
+    color: "#e8dcc8",
+    href: "#",
+    tone: "nexo",
+    mark: "circle",
+    letter: "H",
+    slogan: "Streetwear com atitude.",
+  },
+  {
+    client: "Távora & Dantas",
+    name: "Távora",
     category: "Site",
-    src: "/portfolio/nexotechh-2.jpg",
-    color: "#c8f542",
+    image: "/portfolio/tavora-1.jpg",
+    color: "#0071e3",
+    href: "#",
+    tone: "tavora",
+    mark: "circle",
+    letter: "T",
+    slogan: "Licenciamento empresarial com agilidade.",
   },
 ];
 
@@ -60,7 +99,16 @@ function circularOffset(index: number, active: number, length: number) {
 function PortfolioComponent() {
   const n = slides.length;
   const [active, setActive] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  const startX = useRef(0);
+  const lastX = useRef(0);
+  const pressed = useRef<number | null>(null);
+  const dragging = useRef(false);
+  const frame = useRef(0);
+  const pendingX = useRef(0);
 
   const go = useCallback(
     (dir: -1 | 1) => {
@@ -75,6 +123,50 @@ function PortfolioComponent() {
     },
     [n],
   );
+
+  const onPointerDown = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    dragging.current = true;
+    startX.current = e.clientX;
+    lastX.current = e.clientX;
+    const card = (e.target as HTMLElement).closest("[data-slide]");
+    pressed.current = card ? Number(card.getAttribute("data-slide")) : null;
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }, []);
+
+  const onPointerMove = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!dragging.current) return;
+    lastX.current = e.clientX;
+    pendingX.current = e.clientX - startX.current;
+    if (frame.current) return;
+    frame.current = requestAnimationFrame(() => {
+      frame.current = 0;
+      const dx = pendingX.current;
+      setDragX(dx);
+      if (Math.abs(dx) > 8) setIsDragging(true);
+    });
+  }, []);
+
+  const finishDrag = useCallback(() => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    cancelAnimationFrame(frame.current);
+    frame.current = 0;
+
+    const dx = lastX.current - startX.current;
+    const from = pressed.current;
+    pressed.current = null;
+    setDragX(0);
+    setIsDragging(false);
+
+    if (Math.abs(dx) >= DRAG_THRESHOLD) {
+      go(dx < 0 ? 1 : -1);
+      return;
+    }
+
+    if (from == null || from === active) return;
+    goTo(from);
+  }, [active, go, goTo]);
 
   const current = slides[active];
   const next = slides[wrapIndex(active + 1, n)];
@@ -110,10 +202,14 @@ function PortfolioComponent() {
 
         {isDesktop ? (
           <div
-            className="relative h-[500px] select-none lg:h-[540px]"
+            className={`fan-stage relative h-[420px] select-none lg:h-[460px]${isDragging ? " is-dragging" : ""}`}
             role="region"
             aria-roledescription="carrossel"
             aria-label="Projetos do portfólio"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={finishDrag}
+            onPointerCancel={finishDrag}
           >
             {slides.map((slide, index) => {
               const offset = circularOffset(index, active, n);
@@ -121,59 +217,47 @@ function PortfolioComponent() {
               if (abs > 1) return null;
 
               return (
-                <button
-                  key={slide.src}
-                  type="button"
+                <article
+                  key={slide.image ?? `${slide.name}-${index}`}
+                  data-slide={index}
                   aria-label={slide.client}
                   aria-current={offset === 0}
-                  className="absolute left-1/2 top-1/2 cursor-pointer overflow-hidden rounded-[1.35rem] border-0 bg-[#0c0c0e] text-left shadow-[0_20px_50px_rgba(0,0,0,0.22)] [contain:layout_paint] [transition:transform_280ms_cubic-bezier(0.22,1,0.36,1)]"
+                  className={`fan-card fan-card--stage${isDragging ? " is-dragging" : ""}`}
                   style={{
-                    width: "min(72vw, 820px)",
-                    height: "min(38vw, 430px)",
                     zIndex: 10 - abs,
-                    transform: `translate3d(calc(-50% + ${offset * 38}vw), calc(-50% + ${abs * 16}px), 0) scale(${offset === 0 ? 1 : 0.84})`,
-                  }}
-                  onClick={() => {
-                    if (offset === 0) go(1);
-                    else goTo(index);
+                    transform: `translate3d(calc(-50% + ${offset * 280 + dragX * 0.55}px), calc(-50% + ${abs * 18}px), 0) scale(${offset === 0 ? 1 : 0.86})`,
                   }}
                 >
-                  <Image
-                    src={slide.src}
-                    alt=""
-                    fill
-                    sizes="820px"
-                    quality={75}
-                    className="object-contain"
-                    draggable={false}
-                    priority={offset === 0}
-                  />
-                </button>
+                  <SiteScreen project={slide} priority={offset === 0} />
+                </article>
               );
             })}
           </div>
         ) : (
-          <button
-            type="button"
-            onClick={() => go(1)}
-            className="relative mx-auto block aspect-[16/9] w-full max-w-[28rem] cursor-pointer overflow-hidden rounded-2xl bg-[#0c0c0e] shadow-[0_16px_40px_rgba(0,0,0,0.2)]"
-            aria-label={`Próximo projeto — ${current.client}`}
+          <div
+            className={`fan-stage${isDragging ? " is-dragging" : ""}`}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={finishDrag}
+            onPointerCancel={finishDrag}
           >
-            <Image
-              src={current.src}
-              alt={current.client}
-              fill
-              sizes="(max-width: 448px) 92vw, 448px"
-              quality={75}
-              className="object-contain"
-              priority
-              draggable={false}
-            />
-            {/* Pré-carrega o próximo slide sem pintar na tela */}
-            <span className="sr-only" aria-hidden>
-              <Image src={next.src} alt="" width={8} height={8} quality={75} />
-            </span>
-          </button>
+            <article
+              data-slide={active}
+              className="fan-card mx-auto"
+              aria-label={current.client}
+              style={{
+                transform: `translate3d(${dragX * 0.4}px, 0, 0)`,
+                transition: isDragging ? "none" : "transform 280ms cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            >
+              <SiteScreen project={current} priority />
+              {next.image ? (
+                <span className="sr-only" aria-hidden>
+                  <Image src={next.image} alt="" width={8} height={8} quality={75} />
+                </span>
+              ) : null}
+            </article>
+          </div>
         )}
 
         <div className="mt-5 flex items-center justify-center gap-4 md:mt-8">
@@ -210,7 +294,7 @@ function PortfolioComponent() {
           <div className="mt-3 flex items-center justify-center gap-1.5">
             {slides.map((slide, i) => (
               <button
-                key={slide.src}
+                key={slide.image ?? `${slide.name}-${i}`}
                 type="button"
                 aria-label={`Ir para ${slide.client}`}
                 onClick={() => goTo(i)}

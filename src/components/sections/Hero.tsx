@@ -39,11 +39,11 @@ function HeroComponent() {
     >
       {/* Imagem de fundo — no mobile mais transparente para o texto ganhar contraste */}
       <Image
-        src="/brand/hero-bg.png"
+        src="/brand/hero-bg.jpg"
         alt=""
         fill
         priority
-        className="object-cover object-center opacity-50 md:opacity-100"
+        className="object-cover object-right opacity-50 md:opacity-100"
         sizes="100vw"
         aria-hidden
       />

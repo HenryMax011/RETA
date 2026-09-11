@@ -10,7 +10,7 @@ function AboutComponent() {
   return (
     <section
       id="sobre"
-      className="relative overflow-hidden bg-[#060810] px-6 py-28 md:px-12 md:py-44"
+      className="relative overflow-hidden bg-[#000000] px-6 py-28 md:px-12 md:py-44"
       aria-labelledby="about-heading"
     >
       {/* Laptop no lado esquerdo */}
@@ -27,7 +27,7 @@ function AboutComponent() {
 
       {/* Overlay gradiente da direita para legibilidade do texto */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-l from-[#060810] via-[#060810]/80 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-l from-black via-black/80 to-transparent"
         aria-hidden
       />
 
