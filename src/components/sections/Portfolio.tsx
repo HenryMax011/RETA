@@ -1,239 +1,232 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { memo, useState } from "react";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { Badge } from "@/components/ui/badge";
+import { memo, useCallback, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-interface Project {
-  label: string;
-  description: string;
-  images: { src: string; badge: string }[];
+interface Slide {
+  client: string;
+  category: string;
+  src: string;
   color: string;
 }
 
-const projects: Project[] = [
+const slides: Slide[] = [
   {
-    label: "Távora & Dantas",
-    description: "Site institucional para licenciamento empresarial com agilidade.",
-    images: [
-      { src: "/portfolio/tavora-2.png", badge: "Site" },
-      { src: "/portfolio/tavora-1.png", badge: "Landing Page" },
-      { src: "/portfolio/tavora-3.png", badge: "Soluções" },
-    ],
-    color: "#0ea5e9",
+    client: "Selavie Femme",
+    category: "Branding",
+    src: "/portfolio/selavie-3.jpg",
+    color: "#5ac8fa",
   },
   {
-    label: "Selavie Femme",
-    description: "E-commerce premium para cosméticos com elegância e sofisticação.",
-    images: [
-      { src: "/portfolio/selavie-3.png", badge: "Branding" },
-      { src: "/portfolio/selavie-1.png", badge: "E-commerce" },
-      { src: "/portfolio/selavie-2.png", badge: "Loja Online" },
-    ],
-    color: "#67e8f9",
+    client: "Selavie Femme",
+    category: "E-commerce",
+    src: "/portfolio/selavie-1.jpg",
+    color: "#5ac8fa",
   },
   {
-    label: "Phoenixbor",
-    description: "Presença digital premium para vedação industrial.",
-    images: [
-      { src: "/portfolio/phoenix-1.png", badge: "Site" },
-      { src: "/portfolio/phoenix-3.png", badge: "Trajetória" },
-      { src: "/portfolio/phoenix-2.png", badge: "Identidade" },
-    ],
-    color: "#22c55e",
+    client: "Phoenixbor",
+    category: "Site",
+    src: "/portfolio/phoenix-1.jpg",
+    color: "#34c759",
+  },
+  {
+    client: "Nexotechh",
+    category: "Site",
+    src: "/portfolio/nexotechh-1.jpg",
+    color: "#c8f542",
+  },
+  {
+    client: "Nexotechh",
+    category: "Site",
+    src: "/portfolio/nexotechh-2.jpg",
+    color: "#c8f542",
   },
 ];
 
-function ProjectStack({ project, index }: { project: Project; index: number }) {
-  const reverse = index % 2 === 1;
-  const [frontIdx, setFrontIdx] = useState(0);
-  const total = project.images.length;
+function wrapIndex(i: number, length: number) {
+  return ((i % length) + length) % length;
+}
 
-  const getStackPosition = (imgIdx: number) => {
-    return (imgIdx - frontIdx + total) % total;
-  };
-
-  const handleClick = (imgIdx: number) => {
-    if (getStackPosition(imgIdx) !== 0) {
-      setFrontIdx(imgIdx);
-    }
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-8%" }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="group/stack"
-    >
-      {/* Header */}
-      <div className="mb-12 flex flex-col items-center gap-4 text-center">
-        <span
-          className="inline-block rounded-full px-5 py-2 text-sm font-bold uppercase tracking-[0.2em]"
-          style={{
-            backgroundColor: `${project.color}15`,
-            color: project.color,
-            border: `1px solid ${project.color}30`,
-            boxShadow: `0 0 20px ${project.color}15`,
-          }}
-        >
-          {project.label}
-        </span>
-        <p className="max-w-lg text-base font-medium text-white/70 md:text-lg">{project.description}</p>
-      </div>
-
-      {/* Cards */}
-      <div className="relative mx-auto h-[30rem] max-w-6xl sm:h-[36rem] lg:h-[48rem]">
-        {project.images.map((img, imgIdx) => {
-          const pos = getStackPosition(imgIdx);
-          const isFront = pos === 0;
-          const isSecond = pos === 1;
-
-          const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-          const xOffset = isMobile
-            ? isFront ? "2%" : isSecond ? "8%" : "5%"
-            : reverse
-              ? isFront ? "10%" : isSecond ? "30%" : "20%"
-              : isFront ? "10%" : isSecond ? "-10%" : "0%";
-          const topOffset = isFront ? 0 : isSecond ? (isMobile ? 16 : 24) : (isMobile ? 32 : 48);
-          const rotation = isFront
-            ? (reverse ? 1 : -1)
-            : isSecond
-              ? (reverse ? -2 : 3)
-              : (reverse ? -4 : 5);
-          const zIdx = isFront ? 30 : isSecond ? 20 : 10;
-          const scaleVal = isFront ? 1 : isSecond ? 0.95 : 0.9;
-
-          return (
-            <motion.div
-              key={img.src}
-              className="absolute left-1/2 w-[90%] -translate-x-1/2 cursor-pointer overflow-hidden rounded-2xl border border-white/[0.08] sm:left-auto sm:w-[80%] sm:translate-x-0"
-              style={{
-                boxShadow: isFront
-                  ? `0 30px 80px rgba(0,0,0,0.6), 0 0 40px ${project.color}10`
-                  : "0 20px 50px rgba(0,0,0,0.4)",
-              }}
-              animate={{
-                x: xOffset,
-                y: topOffset,
-                rotate: rotation,
-                zIndex: zIdx,
-                scale: scaleVal,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 26,
-                mass: 0.9,
-              }}
-              onClick={() => handleClick(imgIdx)}
-              whileHover={
-                !isFront
-                  ? { scale: scaleVal + 0.03, y: topOffset - 8, transition: { duration: 0.3 } }
-                  : { scale: 1.01, transition: { duration: 0.3 } }
-              }
-            >
-              <Badge className="absolute right-4 top-4 z-10 rounded-full border-0 bg-white/95 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] text-black shadow-lg backdrop-blur-md sm:right-5 sm:top-5 sm:px-4 sm:text-xs">
-                {img.badge}
-              </Badge>
-              <Image
-                src={img.src}
-                alt={`${project.label} - ${img.badge}`}
-                width={1600}
-                height={1000}
-                quality={95}
-                className="h-full w-full object-cover object-top"
-                priority={imgIdx === 0 && index === 0}
-                unoptimized
-              />
-              {/* Overlay escuro nos cards de trás */}
-              {!isFront && (
-                <motion.div
-                  className="pointer-events-none absolute inset-0"
-                  animate={{ opacity: isSecond ? 0.15 : 0.3 }}
-                  style={{ backgroundColor: "#000" }}
-                />
-              )}
-              {/* Borda glow no card da frente */}
-              {isFront && (
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover/stack:opacity-100"
-                  style={{
-                    boxShadow: `inset 0 0 30px ${project.color}15, 0 0 20px ${project.color}10`,
-                  }}
-                />
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Indicators */}
-      <div className="mt-6 flex items-center justify-center gap-2">
-        {project.images.map((img, imgIdx) => (
-          <button
-            key={img.src}
-            type="button"
-            onClick={() => setFrontIdx(imgIdx)}
-            className="group/dot flex h-8 w-8 cursor-pointer items-center justify-center"
-            aria-label={`Ver ${img.badge}`}
-          >
-            <span
-              className="block h-2 w-2 rounded-full transition-all duration-300"
-              style={{
-                backgroundColor: frontIdx === imgIdx ? project.color : "rgba(255,255,255,0.2)",
-                transform: frontIdx === imgIdx ? "scale(1.4)" : "scale(1)",
-                boxShadow: frontIdx === imgIdx ? `0 0 8px ${project.color}60` : "none",
-              }}
-            />
-          </button>
-        ))}
-      </div>
-    </motion.div>
-  );
+function circularOffset(index: number, active: number, length: number) {
+  let delta = index - active;
+  const half = Math.floor(length / 2);
+  if (delta > half) delta -= length;
+  if (delta < -half) delta += length;
+  return delta;
 }
 
 function PortfolioComponent() {
+  const n = slides.length;
+  const [active, setActive] = useState(0);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  const go = useCallback(
+    (dir: -1 | 1) => {
+      setActive((i) => wrapIndex(i + dir, n));
+    },
+    [n],
+  );
+
+  const goTo = useCallback(
+    (index: number) => {
+      setActive(wrapIndex(index, n));
+    },
+    [n],
+  );
+
+  const current = slides[active];
+  const next = slides[wrapIndex(active + 1, n)];
+
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden bg-[#0a0b0f] px-6 py-28 md:px-12 md:py-36"
+      className="relative overflow-hidden bg-[#f5f5f7] px-4 py-16 md:px-6 md:py-32"
       aria-labelledby="portfolio-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(0,113,227,0.08),transparent_70%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,rgba(0,113,227,0.05),transparent_60%)]"
-        aria-hidden
-      />
-
-      <div className="relative z-10 mx-auto max-w-6xl">
-        <ScrollReveal className="text-center">
-          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.42em] text-[#0071e3]">
-            Portfólio
+      <div className="relative z-10 mx-auto max-w-[92rem]">
+        <div className="mb-8 flex flex-col gap-4 md:mb-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.42em] text-[#0071e3]">
+              Portfólio
+            </p>
+            <h2
+              id="portfolio-heading"
+              className="font-[family-name:var(--font-display)] text-[clamp(1.75rem,8vw,3.4rem)] font-bold leading-[1.2] tracking-tight text-[#1d1d1f]"
+            >
+              Projetos que
+              <br />
+              <span className="mt-1 inline-block w-fit bg-[#0071e3] px-2 py-0.5 text-white">
+                entregam resultados
+              </span>
+            </h2>
+          </div>
+          <p className="max-w-sm text-[14px] leading-relaxed text-[#6e6e73] md:max-w-xs md:text-right md:text-[15px]">
+            Estratégia e expressão visual em projetos pensados para marcas — e
+            construídos para resultado.
           </p>
+        </div>
 
-          <h2
-            id="portfolio-heading"
-            className="font-[family-name:var(--font-display)] text-[clamp(1.85rem,4.4vw,3rem)] font-bold tracking-tight text-white"
+        {isDesktop ? (
+          <div
+            className="relative h-[500px] select-none lg:h-[540px]"
+            role="region"
+            aria-roledescription="carrossel"
+            aria-label="Projetos do portfólio"
           >
-            Projetos que <span className="text-blue-glow">entregam resultados</span>
-          </h2>
+            {slides.map((slide, index) => {
+              const offset = circularOffset(index, active, n);
+              const abs = Math.abs(offset);
+              if (abs > 1) return null;
 
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-white/60 md:text-base">
-            Clique nos cards para explorar cada projeto.
+              return (
+                <button
+                  key={slide.src}
+                  type="button"
+                  aria-label={slide.client}
+                  aria-current={offset === 0}
+                  className="absolute left-1/2 top-1/2 cursor-pointer overflow-hidden rounded-[1.35rem] border-0 bg-[#0c0c0e] text-left shadow-[0_20px_50px_rgba(0,0,0,0.22)] [contain:layout_paint] [transition:transform_280ms_cubic-bezier(0.22,1,0.36,1)]"
+                  style={{
+                    width: "min(72vw, 820px)",
+                    height: "min(38vw, 430px)",
+                    zIndex: 10 - abs,
+                    transform: `translate3d(calc(-50% + ${offset * 38}vw), calc(-50% + ${abs * 16}px), 0) scale(${offset === 0 ? 1 : 0.84})`,
+                  }}
+                  onClick={() => {
+                    if (offset === 0) go(1);
+                    else goTo(index);
+                  }}
+                >
+                  <Image
+                    src={slide.src}
+                    alt=""
+                    fill
+                    sizes="820px"
+                    quality={75}
+                    className="object-contain"
+                    draggable={false}
+                    priority={offset === 0}
+                  />
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => go(1)}
+            className="relative mx-auto block aspect-[16/9] w-full max-w-[28rem] cursor-pointer overflow-hidden rounded-2xl bg-[#0c0c0e] shadow-[0_16px_40px_rgba(0,0,0,0.2)]"
+            aria-label={`Próximo projeto — ${current.client}`}
+          >
+            <Image
+              src={current.src}
+              alt={current.client}
+              fill
+              sizes="(max-width: 448px) 92vw, 448px"
+              quality={75}
+              className="object-contain"
+              priority
+              draggable={false}
+            />
+            {/* Pré-carrega o próximo slide sem pintar na tela */}
+            <span className="sr-only" aria-hidden>
+              <Image src={next.src} alt="" width={8} height={8} quality={75} />
+            </span>
+          </button>
+        )}
+
+        <div className="mt-5 flex items-center justify-center gap-4 md:mt-8">
+          <button
+            type="button"
+            aria-label="Projeto anterior"
+            onClick={() => go(-1)}
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-[#1d1d1f] shadow-sm md:h-11 md:w-11"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <p className="min-w-[4.5rem] text-center font-mono text-[13px] tabular-nums text-[#86868b]">
+            {String(active + 1).padStart(2, "0")}
+            <span className="text-[#d2d2d7]"> / </span>
+            {String(n).padStart(2, "0")}
           </p>
-        </ScrollReveal>
+          <button
+            type="button"
+            aria-label="Próximo projeto"
+            onClick={() => go(1)}
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-white text-[#1d1d1f] shadow-sm md:h-11 md:w-11"
+          >
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
 
-        <div className="mt-20 flex flex-col gap-28 md:gap-36">
-          {projects.map((project, i) => (
-            <ProjectStack key={project.label} project={project} index={i} />
-          ))}
+        <div className="mt-4 text-center">
+          <p className="font-[family-name:var(--font-display)] text-[1.15rem] font-bold tracking-tight text-[#1d1d1f] md:text-[1.35rem]">
+            {current.client}
+          </p>
+          <p className="mt-1 text-[11px] uppercase tracking-[0.16em] text-[#86868b] md:text-[12px]">
+            {current.category}
+          </p>
+          <div className="mt-3 flex items-center justify-center gap-1.5">
+            {slides.map((slide, i) => (
+              <button
+                key={slide.src}
+                type="button"
+                aria-label={`Ir para ${slide.client}`}
+                onClick={() => goTo(i)}
+                className="flex h-8 w-8 cursor-pointer items-center justify-center"
+              >
+                <span
+                  className="block rounded-full transition-transform duration-200"
+                  style={{
+                    width: i === active ? 8 : 6,
+                    height: i === active ? 8 : 6,
+                    backgroundColor: i === active ? current.color : "#d2d2d7",
+                  }}
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

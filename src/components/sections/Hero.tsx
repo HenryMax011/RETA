@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { memo } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 const clients = [
   { name: "Captar", logo: "/clients/captar.png", scale: 0.72 },
@@ -17,6 +17,20 @@ const clients = [
 ];
 
 function HeroComponent() {
+  const logosRef = useRef<HTMLDivElement>(null);
+  const [logosMoving, setLogosMoving] = useState(true);
+
+  useEffect(() => {
+    const el = logosRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setLogosMoving(entry.isIntersecting),
+      { threshold: 0.05 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
       id="inicio"
@@ -31,7 +45,6 @@ function HeroComponent() {
         priority
         className="object-cover object-center opacity-50 md:opacity-100"
         sizes="100vw"
-        unoptimized
         aria-hidden
       />
 
@@ -125,9 +138,14 @@ function HeroComponent() {
             <p className="mb-3 text-center text-[11px] font-medium tracking-[0.15em] text-[#999]">
               Empresas de diversos segmentos confiam na Reta Publicidade para fortalecer suas marcas
             </p>
-            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
-              <div className="flex w-max animate-scroll items-center gap-12">
-                {[...clients, ...clients, ...clients].map((client, i) => (
+            <div
+              ref={logosRef}
+              className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]"
+            >
+              <div
+                className={`flex w-max items-center gap-12 ${logosMoving ? "animate-scroll" : ""}`}
+              >
+                {[...clients, ...clients].map((client, i) => (
                   <div
                     key={`${client.name}-${i}`}
                     className="flex h-16 w-32 shrink-0 items-center justify-center md:h-20 md:w-40"
@@ -135,15 +153,15 @@ function HeroComponent() {
                     <Image
                       src={client.logo}
                       alt={client.name}
-                      width={140}
-                      height={70}
-                      className="max-h-14 w-auto object-contain mix-blend-lighten md:max-h-[4.5rem]"
+                      width={160}
+                      height={80}
+                      sizes="160px"
+                      className="h-auto max-h-14 w-auto object-contain mix-blend-lighten md:max-h-[4.5rem]"
                       style={
                         client.scale
                           ? { transform: `scale(${client.scale})` }
                           : undefined
                       }
-                      unoptimized
                     />
                   </div>
                 ))}

@@ -156,10 +156,6 @@ function ContactComponent() {
           >
             Entre em contato<br />com a <span className="text-blue-glow">RETA</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-white/90">
-            Converse com o assistente. Ao final, sua mensagem segue para o
-            WhatsApp.
-          </p>
         </ScrollReveal>
 
         <ScrollReveal className="mt-10 md:mt-12">

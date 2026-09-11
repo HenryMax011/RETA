@@ -11,8 +11,8 @@ const services = [
     description:
       "Campanhas estratégicas no Google, Meta e LinkedIn — otimização contínua para gerar leads qualificados e ROI mensurável.",
     features: ["Google Ads", "Meta Ads", "ROI"],
-    image: "/services/trafego.jpg",
-    imageAlt: "Dashboard de performance e análises digitais",
+    image: "/services/trafego-pago.jpg",
+    imageAlt: "Painel de campanhas de tráfego pago da Reta",
     icon: (
       <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -24,8 +24,8 @@ const services = [
     description:
       "Gestão completa das redes — criação de imagens, edição de vídeos e conteúdo para Instagram, Reels, Stories e demais plataformas.",
     features: ["Instagram", "Imagens", "Vídeos"],
-    image: "/services/midias.jpg",
-    imageAlt: "Gestão de mídias sociais, criação de imagens e vídeos",
+    image: "/services/midias-sociais.jpg",
+    imageAlt: "Gestão de conteúdo e redes sociais da Reta",
     icon: (
       <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
@@ -37,8 +37,8 @@ const services = [
     description:
       "Sites modernos, responsivos e otimizados para conversão — do design à publicação com performance e identidade visual.",
     features: ["Landing Pages", "E-commerce", "SEO"],
-    image: "/services/branding.jpg",
-    imageAlt: "Criação de sites modernos e responsivos",
+    image: "/services/criacao-sites.jpg",
+    imageAlt: "Site da Reta em desktop, tablet e celular",
     icon: (
       <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
@@ -50,8 +50,8 @@ const services = [
     description:
       "Sistemas sob medida para automatizar processos, dashboards e plataformas que escalam o seu negócio.",
     features: ["Automação", "Dashboards", "APIs"],
-    image: "/services/tecnologia.jpg",
-    imageAlt: "Desenvolvimento de sistemas e plataformas",
+    image: "/services/sistemas-ia.jpg",
+    imageAlt: "Sistema de automação com IA da Reta",
     icon: (
       <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
@@ -104,6 +104,7 @@ function ServicesComponent() {
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+                      unoptimized
                     />
                     <div
                       className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"

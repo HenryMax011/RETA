@@ -23,41 +23,44 @@ export function NavBar({ items, className, tone = "light" }: NavBarProps) {
   const isDark = tone === "dark";
 
   useEffect(() => {
-    const sectionIds = items
-      .map((item) => item.url.replace("#", ""))
-      .filter(Boolean);
+    const update = () => {
+      const probe = 140;
+      let active = items[0]?.name;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible?.target.id) return;
-        const match = items.find((item) => item.url === `#${visible.target.id}`);
-        if (match) setActiveTab(match.name);
-      },
-      { rootMargin: "-20% 0px -30% 0px", threshold: [0.05, 0.15, 0.3, 0.5] },
-    );
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    const handleScroll = () => {
-      const atBottom =
-        window.innerHeight + window.scrollY >= document.body.scrollHeight - 50;
-      if (atBottom) {
-        const lastItem = items[items.length - 1];
-        if (lastItem) setActiveTab(lastItem.name);
+      for (const item of items) {
+        const id = item.url.replace("#", "");
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= probe) {
+          active = item.name;
+        }
       }
+
+      const doc = document.documentElement;
+      const atBottom = window.innerHeight + window.scrollY >= doc.scrollHeight - 80;
+      if (atBottom) {
+        active = items[items.length - 1]?.name;
+      }
+
+      if (active) setActiveTab(active);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
 
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, [items]);
 

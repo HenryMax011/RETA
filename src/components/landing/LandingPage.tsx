@@ -23,8 +23,8 @@ function LandingPageComponent() {
           <Hero />
           <About />
           <Services />
-          <Symbol />
           <Portfolio />
+          <Symbol />
           <Report />
           <Contact />
         </main>

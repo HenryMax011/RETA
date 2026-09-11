@@ -18,10 +18,10 @@ function AboutComponent() {
         <Image
           src="/brand/laptop-mockup.png"
           alt=""
-          width={1400}
-          height={875}
+          width={1200}
+          height={750}
+          sizes="(max-width: 768px) 90vw, 60vw"
           className="w-full max-w-5xl object-contain opacity-70"
-          unoptimized
         />
       </div>
 

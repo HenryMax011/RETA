@@ -11,8 +11,10 @@ const socials = [
 
 const links = [
   { name: "Início", href: "#inicio" },
+  { name: "Sobre nós", href: "#sobre" },
   { name: "Serviços", href: "#servicos" },
-  { name: "Relatório", href: "#relatorio" },
+  { name: "Portfólio", href: "#portfolio" },
+  { name: "Nosso Símbolo", href: "#simbolo" },
   { name: "Contato", href: "#contato" },
 ];
 
