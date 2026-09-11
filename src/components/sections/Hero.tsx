@@ -34,37 +34,24 @@ function HeroComponent() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[100svh] overflow-hidden bg-[#07080c]"
+      className="relative min-h-[100svh] overflow-hidden bg-[#020204]"
       aria-labelledby="hero-heading"
     >
-      {/* Imagem de fundo — no mobile mais transparente para o texto ganhar contraste */}
       <Image
-        src="/brand/hero-bg.jpg"
+        src="/brand/hero-bg-full.jpg"
         alt=""
         fill
         priority
-        className="object-cover object-right opacity-50 md:opacity-100"
+        quality={95}
+        unoptimized
+        className="object-contain object-right"
         sizes="100vw"
         aria-hidden
       />
 
-      {/* Mobile: véu uniforme + vinheta. Desktop: gradiente só à esquerda. */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[#07080c]/58 md:hidden"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#07080c]/45 via-transparent to-[#07080c]/55 md:hidden"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-[#0a0b0f]/65 via-[#0a0b0f]/20 to-transparent md:block"
-        aria-hidden
-      />
-
       {/* Conteúdo por cima */}
-      <div className="relative z-10 flex min-h-[100svh] flex-col justify-between px-6 pt-28 pb-0 md:px-12 md:pt-32 md:pb-0">
-        <div className="mx-auto flex w-full max-w-7xl flex-1 items-center">
+      <div className="relative z-10 flex min-h-[100svh] flex-col justify-between pt-28 pb-0 md:pt-32">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 items-center px-6 md:px-12">
           <div className="max-w-xl">
             <motion.div
               className="mb-6 flex items-center gap-2.5"
@@ -134,7 +121,7 @@ function HeroComponent() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.55 }}
         >
-          <div className="border-t border-white/10 bg-black/40 py-4">
+          <div className="w-full border-t border-white/10 bg-black/55 py-4">
             <p className="mb-3 text-center text-[11px] font-medium tracking-[0.15em] text-[#999]">
               Empresas de diversos segmentos confiam na Reta Publicidade para fortalecer suas marcas
             </p>
