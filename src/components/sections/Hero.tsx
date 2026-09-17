@@ -44,14 +44,14 @@ function HeroComponent() {
         priority
         quality={95}
         unoptimized
-        className="object-contain object-right"
+        className="object-contain object-right opacity-60 md:opacity-100"
         sizes="100vw"
         aria-hidden
       />
 
       {/* Conteúdo por cima */}
       <div className="relative z-10 flex min-h-[100svh] flex-col justify-between pt-28 pb-0 md:pt-32">
-        <div className="mx-auto flex w-full max-w-7xl flex-1 items-center px-6 md:px-12">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 items-start px-6 pt-1 md:items-center md:px-12 md:pt-0">
           <div className="max-w-xl">
             <motion.div
               className="mb-6 flex items-center gap-2.5"
@@ -87,7 +87,7 @@ function HeroComponent() {
             </motion.p>
 
             <motion.div
-              className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+              className="mt-24 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-8"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
