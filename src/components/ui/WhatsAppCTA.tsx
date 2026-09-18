@@ -43,6 +43,11 @@ function WhatsAppCTAComponent({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    const t = setTimeout(() => setOpen(true), 1800);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => inputRef.current?.focus(), 280);
     return () => clearTimeout(t);
